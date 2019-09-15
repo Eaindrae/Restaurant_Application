@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_detail">
+
+    <TextView
+        android:id="@+id/tv_restaurant_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/tv_detail_title"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_heading_1x"
+        android:textStyle="bold" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        android:backgroundTint="@color/colordeeppurple"
+        android:clickable="true"
+        android:padding="@dimen/margin_xlarge"
+        android:src="@drawable/ic_near_me_black_24dp"
+        app:borderWidth="0dp"
+        app:elevation="-4dp" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_restaurant_name"
+        android:layout_alignLeft="@id/tv_restaurant_name"
+        android:layout_alignRight="@id/fab1"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:text="@string/tv_description2"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_regular" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_restaurant_detail"
+        android:layout_alignLeft="@id/tv_restaurant_name"
+        android:layout_alignRight="@id/fab1"
+        android:orientation="horizontal"
+        android:weightSum="9">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <ImageButton
+                android:id="@+id/ib_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:background="@drawable/rounded_shape"
+                android:backgroundTint="@color/dark_gray"
+                android:padding="@dimen/margin_medium"
+                android:src="@drawable/ic_access_time_black_24dp"
+              />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_time"
+                android:layout_centerHorizontal="true"
+                android:text="10am - 10pm" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
+            <ImageButton
+                android:id="@+id/ib_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:background="@drawable/rounded_shape"
+                android:backgroundTint="@color/dark_gray"
+                android:padding="@dimen/margin_medium"
+                android:src="@drawable/ic_my_location_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_location"
+                android:layout_centerHorizontal="true"
+                android:text="@string/tv_1_5km" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
+            <ImageButton
+                android:id="@+id/ib_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:background="@drawable/rounded_shape"
+                android:backgroundTint="@color/dark_gray"
+                android:padding="@dimen/margin_medium"
+                android:src="@drawable/ic_map_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_map"
+                android:layout_centerHorizontal="true"
+                android:text="@string/tv_map" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
+            <ImageButton
+                android:id="@+id/ib_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:background="@drawable/rounded_shape"
+                android:backgroundTint="@color/dark_gray"
+                android:padding="@dimen/margin_medium"
+                android:src="@drawable/ic_directions_car_color_24dp" />
+
+            <TextView
+                android:id="@+id/tv_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_delivery"
+                android:layout_centerHorizontal="true"
+                android:text="@string/tv_delivery" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

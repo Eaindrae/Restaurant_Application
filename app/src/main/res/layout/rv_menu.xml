@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height"
+        android:layout_marginLeft="@dimen/margin_medium_3"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_marginRight="@dimen/margin_medium_3"
+        android:background="@color/color_gray"
+        app:cardBackgroundColor="@color/colortheme"
+        app:cardCornerRadius="@dimen/margin_card_medium_2"
+        app:cardElevation="@dimen/margin_small_n">
+
+
+        <ImageView
+            android:id="@+id/iv_rv_menu1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/menu1" />
+
+        <RelativeLayout
+            android:id="@+id/rL_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/blur"
+            android:padding="@dimen/margin_medium">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/ibtn_deli"
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                android:layout_margin="@dimen/margin_small"
+                android:backgroundTint="@color/dark_gray"
+                android:src="@drawable/ic_directions_car_black_24dp"
+                app:borderWidth="0dp" />
+
+            <RelativeLayout
+                android:id="@+id/rL_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/ibtn_deli"
+                android:gravity="center|bottom">
+
+                <org.mmtextview.components.MMTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="Mexican Bite"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/margin_large" />
+
+                <org.mmtextview.components.MMTextView
+                    android:id="@+id/tv_rating_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:text="4.0"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_regular" />
+
+                <RatingBar
+                    android:id="@+id/rb_star"
+                    style="@style/customRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_medium_3"
+                    android:layout_below="@+id/tv_title"
+                    android:layout_marginLeft="@dimen/margin_medium"
+                    android:layout_toEndOf="@id/tv_rating_num"
+                    android:foregroundGravity="bottom"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@color/color_gray"
+                    android:progressTint="@color/color_rating"
+                    android:rating="4"
+                    android:stepSize="1" />
+
+                <TextView
+                    android:id="@+id/tv_100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title"
+                    android:layout_toEndOf="@id/rb_star"
+                    android:text="(100)"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_regular" />
+            </RelativeLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+               android:id="@+id/fab"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/margin_small"
+                android:backgroundTint="@color/colordeeppurple"
+                android:clickable="true"
+                android:outlineAmbientShadowColor="@android:color/transparent"
+                android:padding="@dimen/margin_xlarge"
+                android:src="@drawable/ic_near_me_black_24dp"
+                app:borderWidth="0dp"
+                app:elevation="-4dp" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rL_2"
+                android:layout_toEndOf="@id/ibtn_deli"
+                android:fontFamily="sans-serif"
+
+                android:text="@string/tv_description"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_small" />
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_round"
+        app:layout_anchor="@id/cardview1"
+        app:layout_anchorGravity="bottom|center">
+
+        <Button
+            android:id="@+id/btn_address"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:fontFamily="sans-serif"
+            android:padding="@dimen/margin_small"
+            android:text="@string/lbl_menu1"
+            android:textColor="@color/colorlightgray"
+            android:textSize="@dimen/text_small" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_toEndOf="@id/btn_address"
+            android:paddingEnd="@dimen/margin_small"
+            android:src="@drawable/ic_navigate_next_white_24dp" />
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
