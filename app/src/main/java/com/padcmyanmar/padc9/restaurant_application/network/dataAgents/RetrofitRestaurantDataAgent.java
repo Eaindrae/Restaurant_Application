@@ -41,19 +41,26 @@ public class RetrofitRestaurantDataAgent implements RestaurantDataAgent {
         return objInstance;
     }
 
-    @Override
-    public void getRestaurants(final GetRestaurantDataAgentDelegate getRestaurantDataAgentDelegate) {
-        Call<GetRestaurantResponse> restaurantCall = mRestaurantApi.getAllRestaurants(RestaurantConstant.DUMMY_ACCESS_TOKEN);
 
+
+    @Override
+    public void getRestaurants(final GetRestaurantDataAgentDelegate getRestaurantDataAgentDelegate, String accessToken) {
+        //get data from api.
+        Call<GetRestaurantResponse> restaurantCall = mRestaurantApi.getAllRestaurants(accessToken);
+
+//do-async
         restaurantCall.enqueue(new Callback<GetRestaurantResponse>() {
             @Override
             public void onResponse(Call<GetRestaurantResponse> call, Response<GetRestaurantResponse> response) {
-                if (response.body().isOk()) {
-                    getRestaurantDataAgentDelegate.onSuccess(response.body().getRestaurants());
+                GetRestaurantResponse getRestaurantsResponse = response.body();
+
+                if(getRestaurantsResponse.isOk()){
+                    getRestaurantDataAgentDelegate.onSuccess(getRestaurantsResponse.getRestaurants());
                 } else {
-                    getRestaurantDataAgentDelegate.onFailure(response.body().getMessage());
+                    getRestaurantDataAgentDelegate.onFailure(getRestaurantsResponse.getMessage());
                 }
             }
+
             @Override
             public void onFailure(Call<GetRestaurantResponse> call, Throwable t) {
                 getRestaurantDataAgentDelegate.onFailure(t.getLocalizedMessage());

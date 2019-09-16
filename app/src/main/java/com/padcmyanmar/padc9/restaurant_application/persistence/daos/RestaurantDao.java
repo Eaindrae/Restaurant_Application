@@ -17,30 +17,27 @@ import java.util.List;
 public abstract class RestaurantDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract long[] save(List<RestaurantVO> restaurants);
+    public abstract void insertRestaurant(List<RestaurantVO> restaurants);
 
-    @Query("SELECT restaurants.*, menus.* FROM restaurants INNER JOIN menus ON menus.restaurant_id = restaurants.id")
-    public abstract List<RestaurantsAndMenusVO> all();
+    @Query("SELECT * from restaurant")
+    public abstract List<RestaurantVO> getAllRestaurants();
 
-    public void save(List<RestaurantVO> restaurants, MenuDao menuDao) {
+    @Query("SELECT * from restaurant WHERE id=:id")
+    public abstract RestaurantVO getRestaurantById(int id);
 
-        List<MenuVO> menus = new ArrayList<>();
+    @Insert
+    public void insertRestaurantAndMenus(List<RestaurantVO> restaurants, MenuDao menuDao){
 
-        for (RestaurantVO restaurant: restaurants ) {
-            for(MenuVO menu : restaurant.getMenus()) {
+        List<MenuVO> menuList = new ArrayList<>();
+
+        for (RestaurantVO restaurant : restaurants) {
+            for(MenuVO menu :restaurant.getMenus()){
                 menu.setRestaurantId(restaurant.getId());
             }
-            menus.addAll(restaurant.getMenus());
+            menuList.addAll(restaurant.getMenus());
         }
 
-        save(restaurants);
-        menuDao.save(menus);
+        insertRestaurant(restaurants);
+        menuDao.insertMenus(menuList);
     }
-
-    @Query("SELECT * FROM restaurants WHERE restaurant_id_pk = :id")
-    public abstract RestaurantVO searchById(int id);
-
-    @Query("SELECT * FROM restaurants ")
-    public abstract List<RestaurantVO> searchByName();
-
 }

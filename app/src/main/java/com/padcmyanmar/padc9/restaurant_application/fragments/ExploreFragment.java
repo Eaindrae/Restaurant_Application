@@ -1,6 +1,7 @@
 package com.padcmyanmar.padc9.restaurant_application.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -10,97 +11,64 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.padcmyanmar.padc9.restaurant_application.Delegate.RestaurantDelegate;
 import com.padcmyanmar.padc9.restaurant_application.R;
-import com.padcmyanmar.padc9.restaurant_application.activities.MainActivity;
-import com.padcmyanmar.padc9.restaurant_application.adapters.RecyclerListAdapter;
-import com.padcmyanmar.padc9.restaurant_application.data.model.RestaurantModel;
-import com.padcmyanmar.padc9.restaurant_application.data.vos.RestaurantVO;
 
-import java.util.List;
+
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ExploreFragment extends Fragment {
+public class ExploreFragment extends BaseFragment {
 
-    @BindView(R.id.rv_restaurants)
-    RecyclerView restaurantList;
+    private static ExploreFragment objInstance;
+    private static RestaurantDelegate restaurantDelegate;
 
-    RecyclerListAdapter adapter;
-    LinearLayoutManager layoutManager;
-    RestaurantDelegate delegate;
+    public ExploreFragment(){}
 
-    @BindView(R.id.et_layout)
-    LinearLayout etLayout;
+    @SuppressLint("ValidFragment")
+    public ExploreFragment(RestaurantDelegate restaurantDelegate){
+        this.restaurantDelegate = restaurantDelegate;
+    }
+
+    public static ExploreFragment getObjInstance(RestaurantDelegate exploreDelegate){
+        objInstance = new ExploreFragment(restaurantDelegate);
+        return objInstance;
+    }
 
     @BindView(R.id.et_search)
     EditText etSearch;
 
-    public ExploreFragment() {
-    }
+//    @BindView(R.id.search_input)
+//    TextInputEditText searchInput;
 
+    @Nullable
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        delegate = (RestaurantDelegate) context;
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final View views = inflater.inflate(R.layout.fragment_explore, container, false);
+        ButterKnife.bind(this, views);
+        restaurantDelegate.onGetAllRestaurantData(getActivity(), views);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_explore, container, false);
-        ButterKnife.bind(this,view);
-        adapter = new RecyclerListAdapter(delegate);
-        layoutManager = new LinearLayoutManager(view.getContext());
-        restaurantList.setLayoutManager(layoutManager);
-        restaurantList.setAdapter(adapter);
         etSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                etLayout.setVisibility(View.VISIBLE);
+            public void onClick(View view) {
+                String keyword = etSearch.getText().toString();
+                restaurantDelegate.onSearchItems(getActivity(), views, keyword);
             }
         });
 
-        etSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<RestaurantVO> houseVoList = MainActivity.restaurantModel.filterHouse(s.toString());
-                adapter.setNewData(houseVoList);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        MainActivity.restaurantModel.getRestaurants( new RestaurantModel.RestaurantModelDelegates() {
-            @Override
-            public void onSuccess(List<RestaurantVO> houseVoList) {
-                adapter.setNewData(houseVoList);
-
-            }
-
-            @Override
-            public void onFailure(String errMessage) {
-                delegate.showErrorSnack(errMessage);
-            }
-        });
-        return view;
+        return views;
     }
 
 }

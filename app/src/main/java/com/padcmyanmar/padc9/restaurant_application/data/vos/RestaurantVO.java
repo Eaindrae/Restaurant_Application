@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@Entity(tableName = "restaurants",
+@Entity(tableName = "restaurant",
         indices = {@Index(value = "id", unique = true)})
 public class RestaurantVO {
 
@@ -40,7 +40,7 @@ public class RestaurantVO {
     private String description;
 
     @SerializedName("opening_closing_times")
-    @Embedded(prefix = "opening_closing_time_")
+    @Ignore
     private OpeningClosingTimeVO openingClosingTime;
 
     @ColumnInfo(name = "rating")
@@ -48,7 +48,7 @@ public class RestaurantVO {
     private String rating;
 
     @SerializedName("restaurant_location")
-    @Embedded(prefix = "restaurant_location_")
+   @Ignore
     private RestaurantLocationVO restaurantLocation;
 
     @SerializedName("menus")

@@ -3,6 +3,7 @@ package com.padcmyanmar.padc9.restaurant_application.data.model;
 import android.content.Context;
 
 
+import com.padcmyanmar.padc9.restaurant_application.data.vos.MenuVO;
 import com.padcmyanmar.padc9.restaurant_application.data.vos.RestaurantVO;
 import com.padcmyanmar.padc9.restaurant_application.data.vos.RestaurantsAndMenusVO;
 import com.padcmyanmar.padc9.restaurant_application.network.dataAgents.RestaurantDataAgent;
@@ -34,51 +35,45 @@ public class RestaurantModelImpl extends BaseModel implements RestaurantModel {
     @Override
     public void getRestaurants(final RestaurantModelDelegates delegates) {
 
-        if (mdatabase.isEmptyRestaurant()) {
+        if (mdatabase.areRestaurantExisting()) {
+            List<RestaurantVO> restaurantList = mdatabase.restaurantDao().getAllRestaurants();
+            delegates.onSuccess(restaurantList);
+
+        } else {
+            //get data from Network Layer.
             restaurantDataAgent.getRestaurants(new RestaurantDataAgent.GetRestaurantDataAgentDelegate() {
                 @Override
                 public void onSuccess(List<RestaurantVO> restaurants) {
-                    mdatabase.restaurantDao().save(restaurants, mdatabase.menuDao());
-
+                    mdatabase.restaurantDao().insertRestaurantAndMenus(restaurants, mdatabase.menuDao());
                     delegates.onSuccess(restaurants);
                 }
 
                 @Override
-                public void onFailure(String errorMessage) {
-                    delegates.onFailure(errorMessage);
+                public void onFailure(String message) {
+                    delegates.onFailure(message);
                 }
-            });
-        } else {
-            List<RestaurantsAndMenusVO> restaurantsAndMenus = mdatabase.restaurantDao().all();
-            List<RestaurantVO> restaurants = new ArrayList<>();
-
-            for (RestaurantsAndMenusVO restaurantsAndMenu : restaurantsAndMenus) {
+            }, RestaurantConstant.DUMMY_ACCESS_TOKEN);
+        }
+    }
 
 
 
-                restaurantsAndMenu.getRestaurant().setMenus(restaurantsAndMenu.getMenus());
-                restaurants.add(restaurantsAndMenu.getRestaurant());
+    public RestaurantVO getRestaurantById(int id){
+        return mdatabase.restaurantDao().getRestaurantById(id);
+    }
+
+    public List<MenuVO> getAllMenuByRestaurantId(int id){
+        return mdatabase.menuDao().getMenusById(id);
+    }
+
+    public List<RestaurantVO> getRestaurantByName(String name){
+        List<RestaurantVO> restaurants = mdatabase.restaurantDao().getAllRestaurants();
+        List<RestaurantVO> resultRestrauants = new ArrayList<>();
+        for (RestaurantVO restaurant : restaurants) {
+            if(restaurant.getName().contains(name)){
+                resultRestrauants.add(restaurant);
             }
-
-            delegates.onSuccess(restaurants);
         }
-    }
-
-
-    @Override
-    public RestaurantVO searchById(int id) {
-        return mdatabase.restaurantDao().searchById(id);
-    }
-
-    @Override
-    public List<RestaurantVO> filterHouse(String query) {
-        List<RestaurantVO> restaurantVoList = mdatabase.restaurantDao().searchByName();
-        List<RestaurantVO> resultList = new ArrayList<>();
-        for (RestaurantVO restaurantVo :
-                restaurantVoList) {
-            if (restaurantVo.getName().toLowerCase().contains(query.toLowerCase()))
-                resultList.add(restaurantVo);
-        }
-        return resultList;
+        return resultRestrauants;
     }
 }

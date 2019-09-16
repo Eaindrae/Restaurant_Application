@@ -53,12 +53,7 @@ public class RecyclerViewHolder extends BaseViewHolder<RestaurantVO> {
     public RecyclerViewHolder(@NonNull View itemView,final RestaurantDelegate delegates) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        loactionFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                delegates.onFabClicked(mData);
-            }
-        });
+
 
         itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -78,7 +73,7 @@ public class RecyclerViewHolder extends BaseViewHolder<RestaurantVO> {
                 .into(restaurantImage);
         restaurantAddress.setText(mData.getAddress());
         restaurantDesc.setText(mData.getDescription());
-        restaurantRating.setText(mData.getRating());
+        restaurantRating.setText(String.valueOf(mData.getRating()));
         ratingBar.setRating(Float.parseFloat(mData.getRating()));
     }
 }

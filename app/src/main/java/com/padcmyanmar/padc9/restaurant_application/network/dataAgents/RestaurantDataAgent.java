@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RestaurantDataAgent {
 
-    void getRestaurants(GetRestaurantDataAgentDelegate getRestaurantDataAgentDelegate);
+    void getRestaurants(GetRestaurantDataAgentDelegate getRestaurantDataAgentDelegate,String accessToken);
 
     interface GetRestaurantDataAgentDelegate {
         void onSuccess(List<RestaurantVO> restaurantVoList);

@@ -13,7 +13,7 @@ import com.padcmyanmar.padc9.restaurant_application.persistence.daos.MenuDao;
 import com.padcmyanmar.padc9.restaurant_application.persistence.daos.RestaurantDao;
 import com.padcmyanmar.padc9.restaurant_application.utils.RestaurantConstant;
 
-@Database(entities = {RestaurantVO.class, MenuVO.class}, version = 4)
+@Database(entities = {RestaurantVO.class, MenuVO.class}, version = 7,exportSchema = false)
 public abstract class RestaurantDatabase extends RoomDatabase {
 
     private static RestaurantDatabase objInstance;
@@ -32,7 +32,7 @@ public abstract class RestaurantDatabase extends RoomDatabase {
 
     public abstract MenuDao menuDao();
 
-    public boolean isEmptyRestaurant() {
-        return restaurantDao().all().isEmpty();
+    public boolean areRestaurantExisting() {
+        return !restaurantDao().getAllRestaurants().isEmpty();
     }
 }

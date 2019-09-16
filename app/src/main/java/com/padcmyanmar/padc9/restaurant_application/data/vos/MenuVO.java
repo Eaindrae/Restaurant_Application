@@ -8,8 +8,9 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "menus",
-        foreignKeys ={@ForeignKey(entity = RestaurantVO.class, parentColumns = "id", childColumns = "restaurant_id")},
+@Entity(tableName = "menu",
+        foreignKeys ={@ForeignKey(entity = RestaurantVO.class, parentColumns = "restaurant_id_pk",
+                childColumns = "restaurant_id")},
         indices = {@Index(value = "id", unique = true)})
 public class MenuVO {
 

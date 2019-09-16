@@ -29,41 +29,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:id="@+id/detail_frame_layout"
-                    android:layout_above="@id/detail_bottom_tab">
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_above="@+id/tablayout"
+                    android:id="@+id/vp_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_xlarge"
+                    />
 
-                </FrameLayout>
                 <com.google.android.material.tabs.TabLayout
-                    android:layout_width = "match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:id="@+id/detail_bottom_tab"
-                    android:background="@drawable/bg_line_for_tab_layout"
-                    app:tabIndicatorColor="@color/colorlightgray"
+                    android:id="@+id/tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:tabIndicatorGravity="top"
-                    app:tabSelectedTextColor="@color/colorlightgray"
+                    android:backgroundTint="@color/cardview_dark_background"
+                    app:tabSelectedTextColor="@color/white_full"
                     app:tabTextColor="@color/color_white"
-                    android:layout_height = "wrap_content">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:id="@+id/detail_tab"
-                        android:layout_width = "wrap_content"
-                        android:layout_height = "wrap_content"
-                        android:text="@string/details"/>
-                    <com.google.android.material.tabs.TabItem
-                        android:id="@+id/menu_tab"
-                        android:layout_width = "wrap_content"
-                        android:layout_height = "wrap_content"
-                        android:text="@string/menu"/>
-                    <com.google.android.material.tabs.TabItem
-                        android:id="@+id/review_tab"
-                        android:layout_width = "wrap_content"
-                        android:layout_height = "wrap_content"
-                        android:text="@string/reviews"/>
-                </com.google.android.material.tabs.TabLayout>
-
+                    app:tabIndicatorColor="@color/white_full"
+                    android:layout_alignParentBottom="true"
+                   />
             </RelativeLayout>
 
 

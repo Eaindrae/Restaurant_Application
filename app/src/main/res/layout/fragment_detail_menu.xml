@@ -7,9 +7,10 @@
     tools:context = ".fragments.DetailMenuFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id = "@+id/detail_menu_list"
+        android:id = "@+id/rv_detail_menu"
         android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        tools:listitem = "@layout/item_restaurant_menu" />
+        android:layout_height = "match_parent"
+        android:layout_margin="@dimen/margin_xlarge"
+        />
 
 </FrameLayout>

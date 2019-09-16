@@ -1,13 +1,13 @@
 package com.padcmyanmar.padc9.restaurant_application.Delegate;
 
+import android.content.Context;
 import android.view.View;
 
 
-import com.padcmyanmar.padc9.restaurant_application.data.vos.RestaurantVO;
-import com.padcmyanmar.padc9.restaurant_application.fragments.RestaurantDetailFragment;
+
 
 public interface RestaurantDelegate {
     void  onTapRestaurant(int restaurantId);
-    void onFabClicked(RestaurantVO restaurant);
-    void showErrorSnack(String errMessage);
+    void onGetAllRestaurantData(Context context, View view);
+    void onSearchItems(Context context, View view, String keyword);
 }

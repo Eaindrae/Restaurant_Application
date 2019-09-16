@@ -10,11 +10,11 @@ import com.padcmyanmar.padc9.restaurant_application.persistence.RestaurantDataba
 
 public abstract class BaseModel {
 
-    protected RestaurantDataAgent restaurantDataAgent;
+    protected RetrofitRestaurantDataAgent restaurantDataAgent;
     protected RestaurantDatabase mdatabase;
 
     public BaseModel(Context context) {
-        this.restaurantDataAgent = RetrofitRestaurantDataAgent.getObjInstance();
+        restaurantDataAgent = RetrofitRestaurantDataAgent.getObjInstance();
         mdatabase = RestaurantDatabase.getInstance(context);
     }
 

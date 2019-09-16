@@ -8,8 +8,7 @@ import java.util.List;
 public interface RestaurantModel {
 
     void getRestaurants(RestaurantModelDelegates delegates);
-    RestaurantVO searchById(int id);
-    List<RestaurantVO> filterHouse(String query);
+
 
     interface RestaurantModelDelegates {
         void onSuccess(List<RestaurantVO> restaurants);

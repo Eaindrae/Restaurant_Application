@@ -6,7 +6,7 @@ public class RestaurantConstant {
     public static final String BASE_URL = "https://04f22052-7bd4-4b0b-8ba2-64e085c18a56.mock.pstmn.io";
 
     // Uri
-    public static final String GET_ALL_RESTAURANTS = "/get"; //get-all-reataurant
+    public static final String GET_ALL_RESTAURANTS = "/get-all-reataurant";
 
     // PARAMS
     public static final String PARAM_ACCESS_TOKEN = "access_token";
